@@ -1,38 +1,35 @@
 var os = require('os');
 var net = require('net');
-var networkInterfaces = os.networkInterfaces()
-
+var arDrone = require('ar-drone');
+var winston = require('winston');
+var autonomy = require('ardrone-autonomy');
+var io = require('socket.io');
 var port = 4242;
-var count = 1;
 
-function callback_server_connection(socket){
-	var remoteAddress = socket.remoteAddress;
-	var remotePort = socket.remotePort;
-	socket.setNoDelay(true);
-	console.log("Connected: ", remoteAddress, " : ", remotePort);
-	var msg = 'Hello ' + remoteAddress + ' : ' + remotePort + '\r\n'
-		+ "You are #" + count + '\r\n';
-	count++
-	socket.end(msg);
+winston.add(winston.transports.File, { filename: 'dronebrain.log' });
+winston.remove(winston.transports.Console);
+var server = io.listen(port);
 
-	socket.on('data', function(data) {
-		console.log(data.toString());
+server.sockets.on('connection', function(socket) {
+	socket.on('location', function(data) {
+		winston.log('info', data.latitude);
+		winston.log('info', data.longitude);
+		console.log("long" + data.longitude);
+		console.log("lat" + data.latitude);	
+	});
+	
+	socket.on('takeoff', function(data) {
+		winston.log('info', data.message);
+		console.log("TAKEOFFDRONE");
+	});
+	
+	socket.on('calibrate', function(data) {
+		winston.log('info', data.message);
+		console.log("CALIBRATE");
 	});
 
-	socket.on('end', function() {
-		console.log("ended: ", remoteAddress, " : ", remotePort);
+	socket.on('reset', function(data) {
+		winston.log('info', data.message);
+		console.log("RESET");
 	});
-}
-
-console.log("nodejs server is waiting:");
-for(var interface in networkInterfaces) {
-	networkInterfaces[interface].forEach(function(details) {
-		if((details.family=='IPv4') && !details.internal) {
-			console.log(interface, details.address);
-		}
-	});
-}
-
-console.log("port: ", port);
-var netServer = net.createServer(callback_server_connection);
-netServer.listen(port)
+});
