@@ -34,11 +34,13 @@ var hovercallback = function() {
 
 var moveforwardcallback = function() {
 	//controller.forward(0.5, callback);
-	controller.forward(2, backwardscallback);
+	controller.forward(0.5, backwardscallback);
+	controller.up(1, callback);
 };
 
 var backwardscallback = function() {
-	controller.backward(2, callback);
+	controller.backward(0.5, callback);
+	controller.down(1, callback);
 };
 
 //event handlers for the android app.
