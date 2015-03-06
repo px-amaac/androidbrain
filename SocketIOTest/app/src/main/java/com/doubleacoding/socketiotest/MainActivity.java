@@ -1,21 +1,9 @@
 package com.doubleacoding.socketiotest;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.Button;
-
-import com.github.nkzawa.engineio.client.Socket;
-import com.github.nkzawa.socketio.client.IO;
-
-import java.net.URISyntaxException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,9 +12,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SocketFragment socketFragment = SocketFragment.newInstance();
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, socketFragment)
                     .commit();
         }
     }
@@ -54,39 +43,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-
-        private com.github.nkzawa.socketio.client.Socket mSocket;
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            Button button = (Button) rootView.findViewById(R.id.connect);
-            button.setOnClickListener(this);
-            try{
-                mSocket = IO.socket("http://192.168.0.1");
-            } catch (URISyntaxException e) {}
-
-            return rootView;
-        }
-
-        @Override
-        public void onClick(View v) {
-            mSocket.connect();
-            mSocket.emit("gpsdata", "HeyDude");
-        }
-
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-
-            mSocket.disconnect();
-        }
-    }
 }
