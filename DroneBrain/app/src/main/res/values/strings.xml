@@ -7,5 +7,7 @@
     <string name="takeoffland">Takeoff/Land</string>
     <string name="calibrate">Calibrate</string>
     <string name="reset">Reset</string>
+    <string name="servicename">DroneBrainService</string>
+    <string name="stop_all">StopAll</string>
 
 </resources>
