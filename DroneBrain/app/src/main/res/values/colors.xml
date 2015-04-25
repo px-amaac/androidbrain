@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#ff366843</color>
+    <color name="primary_pressed">#ff66cfae</color>
+    <color name="ripple">#ffb9f9df</color>
+    <color name="white">#FFFFFF</color>
+</resources>
