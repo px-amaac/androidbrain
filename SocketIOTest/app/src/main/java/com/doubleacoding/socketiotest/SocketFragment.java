@@ -274,7 +274,6 @@ public class SocketFragment extends Fragment implements View.OnClickListener, Go
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
-        Log.i(":::::::::LOCATIONUPDATE:::::::", location.toString());
         Toast.makeText(getActivity(), location.toString(),
                 Toast.LENGTH_SHORT).show();
     }
