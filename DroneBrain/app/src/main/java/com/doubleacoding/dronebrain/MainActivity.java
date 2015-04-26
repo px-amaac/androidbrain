@@ -92,6 +92,27 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+        FloatingActionButton calibrateButton = (FloatingActionButton) findViewById(R.id.calibrate);
+        calibrateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDroneService.calibrate();
+            }
+        });
+        FloatingActionButton resetButton = (FloatingActionButton) findViewById(R.id.reset);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDroneService.reset();
+            }
+        });
+        FloatingActionButton takeoffButton = (FloatingActionButton) findViewById(R.id.takeofflandfab);
+        takeoffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDroneService.takeoff();
+            }
+        });
     }
 
 
