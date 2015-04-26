@@ -22,6 +22,25 @@ var server = io.listen(port);
 //callback for arclient
 var callback = function(err) { if (err) console.log(err); };
 
+var turncccallback = function(cb) {
+	controller.cw(180, cb);
+
+};
+
+var hovercallback = function() {
+	controller.hover();
+	controller.cw(180, moveforwardcallback);
+};
+
+var moveforwardcallback = function() {
+	//controller.forward(0.5, callback);
+	controller.forward(2, backwardscallback);
+};
+
+var backwardscallback = function() {
+	controller.backward(2, callback);
+};
+
 //event handlers for the android app.
 server.sockets.on('connection', function(socket) {
 	socket.on('location', function(data) {
@@ -54,4 +73,15 @@ server.sockets.on('connection', function(socket) {
 		winston.log('info', data.message);
 		console.log("RESET");
 	});
+
+	socket.on('testdata', function(data) {
+		if(flying == 1){
+			controller.zero();
+			controller.altitude(1, hovercallback);
+			//controller.left(0.5, callback);
+			//controller.right(0.5, callback);
+
+		}
+	});
+
 });
