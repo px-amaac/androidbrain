@@ -1,38 +1,87 @@
-var os = require('os');
-var net = require('net');
-var networkInterfaces = os.networkInterfaces()
-
+var ardrone = require('ar-drone');
+var winston = require('winston');
+var autonomy = require('ardrone-autonomy');
+var io = require('socket.io');
 var port = 4242;
-var count = 1;
+var flying = 0;
+var client = ardrone.createClient();
+//force client to send gps with nav data
+client.config('general:navdata_options', 777060865);
 
-function callback_server_connection(socket){
-	var remoteAddress = socket.remoteAddress;
-	var remotePort = socket.remotePort;
-	socket.setNoDelay(true);
-	console.log("Connected: ", remoteAddress, " : ", remotePort);
-	var msg = 'Hello ' + remoteAddress + ' : ' + remotePort + '\r\n'
-		+ "You are #" + count + '\r\n';
-	count++
-	socket.end(msg);
+client.on('navdata', function(navdata) {
+	winston.log('info', navdata);
+	winston.log('info', navdata.gps);
+});
 
-	socket.on('data', function(data) {
-		console.log(data.toString());
+var controller = new autonomy.Controller(client, {debug: false});
+
+winston.add(winston.transports.File, { filename: 'dronebrain.log' });
+winston.remove(winston.transports.Console);
+var server = io.listen(port);
+
+//callback for arclient
+var callback = function(err) { if (err) console.log(err); };
+
+var turncccallback = function(cb) {
+	controller.cw(180, cb);
+
+};
+
+var hovercallback = function() {
+	controller.hover();
+	controller.cw(180, moveforwardcallback);
+};
+
+var moveforwardcallback = function() {
+	//controller.forward(0.5, callback);
+	controller.forward(2, backwardscallback);
+};
+
+var backwardscallback = function() {
+	controller.backward(2, callback);
+};
+
+//event handlers for the android app.
+server.sockets.on('connection', function(socket) {
+	socket.on('location', function(data) {
+		winston.log('info', data.latitude);
+		winston.log('info', data.longitude);
+		console.log("long" + data.longitude);
+		console.log("lat" + data.latitude);	
 	});
-
-	socket.on('end', function() {
-		console.log("ended: ", remoteAddress, " : ", remotePort);
-	});
-}
-
-console.log("nodejs server is waiting:");
-for(var interface in networkInterfaces) {
-	networkInterfaces[interface].forEach(function(details) {
-		if((details.family=='IPv4') && !details.internal) {
-			console.log(interface, details.address);
+	
+	socket.on('takeoff', function(data) {
+		winston.log('info', data.message);
+		console.log("TAKEOFFDRONE");
+		if(flying == 0) {
+			client.takeoff(callback);
+			flying = 1;	
+		} else {
+			client.land(callback);
+			flying = 0;
 		}
 	});
-}
+	
+	socket.on('calibrate', function(data) {
+		winston.log('info', data.message);
+		console.log("CALIBRATE");
+		//calibrate drone
+		client.calibrate(0);
+	});
 
-console.log("port: ", port);
-var netServer = net.createServer(callback_server_connection);
-netServer.listen(port)
+	socket.on('reset', function(data) {
+		winston.log('info', data.message);
+		console.log("RESET");
+	});
+
+	socket.on('testdata', function(data) {
+		if(flying == 1){
+			controller.zero();
+			controller.altitude(1, hovercallback);
+			//controller.left(0.5, callback);
+			//controller.right(0.5, callback);
+
+		}
+	});
+
+});
