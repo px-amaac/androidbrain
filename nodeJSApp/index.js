@@ -5,10 +5,15 @@ var io = require('socket.io');
 var port = 4242;
 var flying = 0;
 var client = ardrone.createClient();
+var connected = false;
 //force client to send gps with nav data
 client.config('general:navdata_options', 777060865);
 
 client.on('navdata', function(navdata) {
+	if(!connected){
+		connected = true;
+		console.log("droneconnected");
+	}
 	winston.log('info', navdata);
 	winston.log('info', navdata.gps);
 });
@@ -29,37 +34,36 @@ var turncccallback = function(cb) {
 
 var hovercallback = function() {
 	controller.hover();
-	controller.cw(180, moveforwardcallback);
 };
 
 var moveforwardcallback = function() {
-	//controller.forward(0.5, callback);
-	controller.forward(0.5, backwardscallback);
-	controller.up(1, callback);
-};
-
-var backwardscallback = function() {
-	controller.backward(0.5, callback);
-	controller.down(1, callback);
+	controller.forward(0.5, callback);
 };
 
 //event handlers for the android app.
 server.sockets.on('connection', function(socket) {
+	client.on('navdata', function(navdata) {
+		if(connected) {
+			connected = true;
+			console.log("droneconnected");
+		}
+		socket.emit('dronedata', navdata);
+	});
 	socket.on('location', function(data) {
 		winston.log('info', data.latitude);
 		winston.log('info', data.longitude);
-		console.log("long" + data.longitude);
-		console.log("lat" + data.latitude);	
+		console.log("long" + data.gps.longitude);
+		console.log("lat" + data.gps.latitude);	
 	});
 	
 	socket.on('takeoff', function(data) {
 		winston.log('info', data.message);
 		console.log("TAKEOFFDRONE");
 		if(flying == 0) {
-			client.takeoff(callback);
+		//	client.takeoff(callback);
 			flying = 1;	
 		} else {
-			client.land(callback);
+		//	client.land(callback);
 			flying = 0;
 		}
 	});
@@ -68,7 +72,7 @@ server.sockets.on('connection', function(socket) {
 		winston.log('info', data.message);
 		console.log("CALIBRATE");
 		//calibrate drone
-		client.calibrate(0);
+		//client.calibrate(0);
 	});
 
 	socket.on('reset', function(data) {
@@ -77,13 +81,10 @@ server.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('testdata', function(data) {
-		if(flying == 1){
-			controller.zero();
-			controller.altitude(1, hovercallback);
-			//controller.left(0.5, callback);
-			//controller.right(0.5, callback);
+		console.log("zero drone");
+		controller.zero();
+		console.log("lat " + controller.origin().lat + "lon " + controller.origin().lon);
 
-		}
 	});
 
 });
