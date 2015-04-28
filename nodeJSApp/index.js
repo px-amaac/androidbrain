@@ -10,10 +10,6 @@ var connected = false;
 client.config('general:navdata_options', 777060865);
 
 client.on('navdata', function(navdata) {
-	if(!connected){
-		connected = true;
-		console.log("droneconnected");
-	}
 	winston.log('info', navdata);
 	winston.log('info', navdata.gps);
 });
@@ -43,7 +39,7 @@ var moveforwardcallback = function() {
 //event handlers for the android app.
 server.sockets.on('connection', function(socket) {
 	client.on('navdata', function(navdata) {
-		if(connected) {
+		if(!connected) {
 			connected = true;
 			console.log("droneconnected");
 		}
