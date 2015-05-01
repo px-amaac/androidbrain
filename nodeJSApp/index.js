@@ -19,7 +19,6 @@ var controller = new autonomy.Controller(client, {debug: false});
 winston.add(winston.transports.File, { filename: 'dronebrain.log' });
 winston.remove(winston.transports.Console);
 var server = io.listen(port);
-var gotome = false;
 //callback for arclient
 var callback = function(err) { if (err) console.log(err); };
 
@@ -44,10 +43,8 @@ server.sockets.on('connection', function(socket) {
 		console.log("lat" + data.latitude);	
 		var loc = {lat:0.0, lon:0.0};
 		loc.lat = data.latitude;
-		loc.lon = data.longitude;
-		if(gotome){
-			controller.gotolatlon(loc, callback);
-		}
+		loc.lon = -1 *data.longitude;
+		controller.gotolatlon(loc, callback);
 	});
 	
 	socket.on('takeoff', function(data) {
@@ -116,7 +113,7 @@ server.sockets.on('connection', function(socket) {
 	});
 	socket.on('follow', function(data) {
 		console.log("FOLLOW");
-		gotome = !gotome;
+		controller.follow();
 	});
 
 });
