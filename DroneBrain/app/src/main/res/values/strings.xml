@@ -9,5 +9,21 @@
     <string name="reset">Reset</string>
     <string name="servicename">DroneBrainService</string>
     <string name="stop_all">StopAll</string>
+    <string name="drone_navdata">Drone NavData</string>
+    <string name="flying_state">Flying State:</string>
+    <string name="battery">Battery:</string>
+    <string name="rotation">Rotation</string>
+    <string name="velocity">Velocity</string>
+    <string name="magneto">Magneto</string>
+    <string name="gps">GPS</string>
+    <string name="forward">Forward</string>
+    <string name="backward">Backward</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="clockwise">Clockwise</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="zero">Zero</string>
+    <string name="follow_me">Follow Me</string>
 
 </resources>

@@ -10,6 +10,345 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
 
+    <LinearLayout
+        android:id="@+id/navdatapanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/navdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drone_navdata" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/flyingstate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flying_state" />
+
+            <TextView
+                android:id="@+id/flyingstatedata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/batterypercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/battery" />
+
+            <TextView
+                android:id="@+id/batterypercentagedata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rotation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rotation" />
+
+            <TextView
+                android:id="@+id/rotationdata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/velocity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/velocity" />
+
+            <TextView
+                android:id="@+id/velocitydata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/magneto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/magneto" />
+
+            <TextView
+                android:id="@+id/magnetodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gps" />
+
+            <TextView
+                android:id="@+id/gpsdata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonpanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/forwardlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/forwardfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forward"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/backwardlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/backwardfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/backward"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/leftlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/leftfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/left"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/rightfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/right"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/clockwiselayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/clockwisefab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clockwise"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/uplayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/upfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/up"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/downlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/downfab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/zerolayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/zerofab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:textSize="@dimen/abc_text_size_large_material" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/mainfab"
         android:layout_width="wrap_content"
@@ -26,13 +365,11 @@
         android:id="@+id/takeofflandlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/mainfab"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,100 +385,145 @@
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
             fab:fab_colorRipple="@color/ripple"
-            fab:fab_shadow="true"
-            fab:fab_type="mini" />
+            fab:fab_shadow="true"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/calibratelayout"
+        android:id="@+id/buttonpanel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/takeofflandlayout"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_above="@id/mainfab"
+        android:orientation="vertical"
         android:visibility="gone">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/calibratelayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/calibrate"
-            android:textSize="@dimen/abc_text_size_large_material" />
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/calibrate"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calibrate"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/calibrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resetlayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed"
-            fab:fab_colorRipple="@color/ripple"
-            fab:fab_shadow="true"
-            fab:fab_type="mini" />
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/stoplayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stop_all"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/followmelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follow_me"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/followme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                fab:fab_colorNormal="@color/primary"
+                fab:fab_colorPressed="@color/primary_pressed"
+                fab:fab_colorRipple="@color/ripple"
+                fab:fab_shadow="true"
+                fab:fab_type="mini" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/resetlayout"
+    <TextView
+        android:id="@+id/xpos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/calibratelayout"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset"
-            android:textSize="@dimen/abc_text_size_large_material" />
-
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed"
-            fab:fab_colorRipple="@color/ripple"
-            fab:fab_shadow="true"
-            fab:fab_type="mini" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/stoplayout"
+    <TextView
+        android:id="@+id/ypos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/resetlayout"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stop_all"
-            android:textSize="@dimen/abc_text_size_large_material" />
-
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed"
-            fab:fab_colorRipple="@color/ripple"
-            fab:fab_shadow="true"
-            fab:fab_type="mini" />
-    </LinearLayout>
-
+    <ToggleButton
+        android:id="@+id/kalmantoggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/xpos"
+        android:layout_alignParentLeft="true"
+        android:onClick="onToggleClicked" />
 
 </RelativeLayout>

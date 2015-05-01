@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.github.nkzawa:socket.io-client:0.4.2'
+    compile 'com.jakewharton:butterknife:6.1.0'
 }
