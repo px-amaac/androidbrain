@@ -77,14 +77,6 @@ server.sockets.on('connection', function(socket) {
 	socket.on('zero', function(data) {
 		console.log("ZERO");
 		controller.zero();
-		if(gotome)
-		{
-			gotome = false;
-		}
-		else
-		{
-			gotome = true;
-		}
 	});
 
 	socket.on('forward', function(data) {
@@ -121,6 +113,10 @@ server.sockets.on('connection', function(socket) {
 		console.log("DOWN");
 		controller.down(1, callback);
 
+	});
+	socket.on('follow', function(data) {
+		console.log("FOLLOW");
+		gotome = !gotome;
 	});
 
 });
